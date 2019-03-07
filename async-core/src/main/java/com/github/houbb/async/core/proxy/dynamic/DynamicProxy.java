@@ -5,14 +5,12 @@
 
 package com.github.houbb.async.core.proxy.dynamic;
 
+import com.github.houbb.async.core.model.AsyncResult;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ExecutorCompletionService;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * <p> 动态代理 </p>
@@ -29,9 +27,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class DynamicProxy implements InvocationHandler {
 
-    private static ExecutorService executor = new ThreadPoolExecutor(10,10,60L, TimeUnit.SECONDS,new ArrayBlockingQueue(10));
-
-    ExecutorCompletionService<Object> completionService = new ExecutorCompletionService<>(executor);
+    private static ExecutorService executor = Executors.newFixedThreadPool(10);
 
     /**
      * 被代理的对象
@@ -42,12 +38,30 @@ public class DynamicProxy implements InvocationHandler {
         this.subject = subject;
     }
 
+    /**
+     * 这种方式虽然实现了异步执行，但是存在一个缺陷：
+     * 强制用户返回值为 Future 的子类。
+     *
+     * 如何实现不影响原来的值，要怎么实现呢？
+     * @param proxy
+     * @param method
+     * @param args
+     * @return
+     * @throws Throwable
+     */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         // 当代理对象调用真实对象的方法时，其会自动的跳转到代理对象关联的handler对象的invoke方法来进行调用
         // 这里将待执行的方法，放在 Executor 中进行执行。
-        completionService.submit(() -> method.invoke(subject, args));
-        return completionService.take().get();
+        System.out.println("开始执行异步处理....");
+
+        Future future = executor.submit(() -> method.invoke(subject, args));
+        System.out.println("异步处理已经提交....");
+
+        AsyncResult asyncResult = new AsyncResult();
+        System.out.println("AsyncResult 设置 future: " + future);
+        asyncResult.setFuture(future);
+        return asyncResult;
     }
 
     /**

@@ -11,6 +11,7 @@
     <modules>
         <module>async-api</module>
         <module>async-core</module>
+        <module>async-test</module>
     </modules>
 
 
@@ -46,6 +47,18 @@
     <dependencyManagement>
 
         <dependencies>
+            <!--============================== SELF ==============================-->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>async-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>async-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <!--============================== OTHER ==============================-->
             <dependency>
                 <groupId>org.junit.jupiter</groupId>

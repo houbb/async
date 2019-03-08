@@ -2,9 +2,9 @@
 echo "============================= RELEASE START..."
 
 ## 版本号信息(需要手动指定)
-oldVersion="0.0.3"
-newVersion="0.0.4"
-projectName="heaven"
+oldVersion="0.0.1"
+newVersion="0.0.2"
+projectName="async"
 
 # release 项目版本
 ## snapshot 版本号

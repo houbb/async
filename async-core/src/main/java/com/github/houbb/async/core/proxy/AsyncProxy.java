@@ -45,4 +45,7 @@ public final class AsyncProxy {
         return new CglibProxy(object).proxy();
     }
 
+
+
+
 }

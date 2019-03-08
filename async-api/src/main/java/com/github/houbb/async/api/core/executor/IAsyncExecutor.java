@@ -5,7 +5,10 @@
 
 package com.github.houbb.async.api.core.executor;
 
-import java.util.concurrent.Executor;
+import com.github.houbb.async.api.core.async.IAsyncResult;
+
+import java.lang.reflect.Method;
+import java.util.concurrent.ExecutorService;
 
 /**
  * <p> 异步框架执行器 </p>
@@ -16,5 +19,5 @@ import java.util.concurrent.Executor;
  * @author houbinbin
  * @since 0.0.1
  */
-public interface IAsyncExecutor extends Executor {
+public interface IAsyncExecutor extends ExecutorService {
 }

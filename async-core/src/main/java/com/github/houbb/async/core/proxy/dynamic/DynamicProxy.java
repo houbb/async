@@ -6,6 +6,7 @@
 package com.github.houbb.async.core.proxy.dynamic;
 
 import com.github.houbb.async.api.core.proxy.IAsyncProxy;
+import com.github.houbb.async.core.executor.AsyncExecutor;
 import com.github.houbb.async.core.model.async.AsyncResult;
 
 import java.lang.reflect.InvocationHandler;
@@ -27,8 +28,6 @@ import java.util.concurrent.*;
  * @since 0.0.1
  */
 public class DynamicProxy implements InvocationHandler, IAsyncProxy {
-
-    private static ExecutorService executor = Executors.newFixedThreadPool(10);
 
     /**
      * 被代理的对象
@@ -53,13 +52,7 @@ public class DynamicProxy implements InvocationHandler, IAsyncProxy {
     @Override
     @SuppressWarnings("all")
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        // 当代理对象调用真实对象的方法时，其会自动的跳转到代理对象关联的handler对象的invoke方法来进行调用
-        // 这里将待执行的方法，放在 Executor 中进行执行。
-        //TODO: 对于异常结果的处理。
-        Future future = executor.submit(() -> method.invoke(target, args));
-        AsyncResult asyncResult = new AsyncResult();
-        asyncResult.setFuture(future);
-        return asyncResult;
+        return AsyncExecutor.submit(target, method, args);
     }
 
     @Override

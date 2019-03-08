@@ -1,6 +1,7 @@
 package com.github.houbb.async.core.proxy.cglib;
 
 import com.github.houbb.async.api.core.proxy.IAsyncProxy;
+import com.github.houbb.async.core.executor.AsyncExecutor;
 import com.github.houbb.async.core.model.async.AsyncResult;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
@@ -19,8 +20,6 @@ import java.util.concurrent.Future;
  */
 public class CglibProxy implements MethodInterceptor, IAsyncProxy {
 
-    private static ExecutorService executor = Executors.newFixedThreadPool(10);
-
     /**
      * 被代理的对象
      */
@@ -32,12 +31,7 @@ public class CglibProxy implements MethodInterceptor, IAsyncProxy {
 
     @Override
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-        // 当代理对象调用真实对象的方法时，其会自动的跳转到代理对象关联的handler对象的invoke方法来进行调用
-        // 这里将待执行的方法，放在 Executor 中进行执行。
-        Future future = executor.submit(() -> method.invoke(target, objects));
-        AsyncResult asyncResult = new AsyncResult();
-        asyncResult.setFuture(future);
-        return asyncResult;
+        return AsyncExecutor.submit(target, method, objects);
     }
 
     @Override

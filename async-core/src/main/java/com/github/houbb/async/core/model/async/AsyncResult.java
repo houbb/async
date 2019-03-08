@@ -13,8 +13,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
+ * 异步执行结果
  * @author binbin.hou
- * date 2019/3/7
+ * @date 2019/3/7
+ * @since 0.0.1
  */
 public class AsyncResult<T> extends AbstractAsyncResult<T> {
 
@@ -32,6 +34,7 @@ public class AsyncResult<T> extends AbstractAsyncResult<T> {
      * 获取执行的结果
      * @return 结果
      */
+    @Override
     public Object getResult() {
         // 直接返回结果
         if(future == null) {

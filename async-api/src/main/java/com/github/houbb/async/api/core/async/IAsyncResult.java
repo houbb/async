@@ -18,4 +18,11 @@ import java.util.concurrent.Future;
  * @param <T> 泛型类型
  */
 public interface IAsyncResult<T> extends Future<T> {
+
+    /**
+     * 获取执行的结果
+     * @return 结果
+     */
+    Object getResult();
+
 }

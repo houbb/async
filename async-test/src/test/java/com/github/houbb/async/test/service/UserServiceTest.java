@@ -4,7 +4,6 @@ import com.github.houbb.async.core.model.async.AsyncResult;
 import com.github.houbb.async.core.proxy.AsyncProxy;
 import com.github.houbb.async.test.service.impl.UserServiceDefault;
 import com.github.houbb.async.test.service.impl.UserServiceImpl;
-
 import org.junit.jupiter.api.Test;
 
 /**

@@ -189,6 +189,15 @@
                                 </goals>
                             </execution>
                         </executions>
+                        <configuration>
+                            <tags>
+                                <tag>
+                                    <name>date</name>
+                                    <placement>a</placement>
+                                    <head>日期</head>
+                                </tag>
+                            </tags>
+                        </configuration>
                     </plugin>
                     <!-- GPG -->
                     <plugin>

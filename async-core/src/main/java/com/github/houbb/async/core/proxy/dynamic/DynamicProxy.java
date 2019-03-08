@@ -5,7 +5,8 @@
 
 package com.github.houbb.async.core.proxy.dynamic;
 
-import com.github.houbb.async.core.model.AsyncResult;
+import com.github.houbb.async.api.core.proxy.IAsyncProxy;
+import com.github.houbb.async.core.model.async.AsyncResult;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -25,7 +26,7 @@ import java.util.concurrent.*;
  * @author houbinbin
  * @since 0.0.1
  */
-public class DynamicProxy implements InvocationHandler {
+public class DynamicProxy implements InvocationHandler, IAsyncProxy {
 
     private static ExecutorService executor = Executors.newFixedThreadPool(10);
 
@@ -43,38 +44,31 @@ public class DynamicProxy implements InvocationHandler {
      * 强制用户返回值为 Future 的子类。
      *
      * 如何实现不影响原来的值，要怎么实现呢？
-     * @param proxy
-     * @param method
-     * @param args
-     * @return
-     * @throws Throwable
+     * @param proxy 代理
+     * @param method 方法
+     * @param args 入参
+     * @return 结果
+     * @throws Throwable 异常
      */
     @Override
+    @SuppressWarnings("all")
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         // 当代理对象调用真实对象的方法时，其会自动的跳转到代理对象关联的handler对象的invoke方法来进行调用
         // 这里将待执行的方法，放在 Executor 中进行执行。
-        System.out.println("开始执行异步处理....");
-
+        //TODO: 对于异常结果的处理。
         Future future = executor.submit(() -> method.invoke(subject, args));
-        System.out.println("异步处理已经提交....");
-
         AsyncResult asyncResult = new AsyncResult();
-        System.out.println("AsyncResult 设置 future: " + future);
         asyncResult.setFuture(future);
         return asyncResult;
     }
 
-    /**
-     * 获取动态代理
-     *
-     * @param realSubject 代理对象
-     */
-    public static Object getProxy(Object realSubject) {
-        //    我们要代理哪个真实对象，就将该对象传进去，最后是通过该真实对象来调用其方法的
-        InvocationHandler handler = new DynamicProxy(realSubject);
-        return Proxy.newProxyInstance(handler.getClass().getClassLoader(),
-                realSubject.getClass().getInterfaces(), handler);
-    }
+    @Override
+    public Object proxy(Object object) {
+        // 我们要代理哪个真实对象，就将该对象传进去，最后是通过该真实对象来调用其方法的
+        InvocationHandler handler = new DynamicProxy(object);
 
+        return Proxy.newProxyInstance(handler.getClass().getClassLoader(),
+                object.getClass().getInterfaces(), handler);
+    }
 
 }

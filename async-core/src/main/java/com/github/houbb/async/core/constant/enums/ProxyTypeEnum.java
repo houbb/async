@@ -17,6 +17,11 @@ package com.github.houbb.async.core.constant.enums;
 public enum ProxyTypeEnum {
 
     /**
+     * 不执行任何代理
+     */
+    NONE,
+
+    /**
      * jdk 动态代理
      */
     DYNAMIC,

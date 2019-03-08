@@ -12,4 +12,12 @@
     <artifactId>async-core</artifactId>
     <description>The core module of async project.</description>
 
+    <dependencies>
+        <!--============================== SELF ==============================-->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>async-api</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

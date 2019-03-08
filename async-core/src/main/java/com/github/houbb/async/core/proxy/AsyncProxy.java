@@ -1,0 +1,36 @@
+/*
+ * Copyright (c)  2019. houbinbin Inc.
+ * async All rights reserved.
+ */
+
+package com.github.houbb.async.core.proxy;
+
+import com.github.houbb.async.core.proxy.dynamic.DynamicProxy;
+import com.github.houbb.async.core.proxy.none.NoneProxy;
+import com.github.houbb.async.core.util.AsyncClassUtil;
+
+/**
+ * <p> 代理信息 </p>
+ *
+ * <pre> Created: 2019/3/8 10:38 AM  </pre>
+ * <pre> Project: async  </pre>
+ *
+ * @author houbinbin
+ * @since 0.0.1
+ */
+public final class AsyncProxy {
+
+    /**
+     * 获取对象代理
+     * @param object 对象代理
+     * @return 代理信息
+     */
+    public static Object getProxy(final Object object) {
+        if(AsyncClassUtil.hasInterface(object)) {
+            return new DynamicProxy(object).proxy(object);
+        }
+
+        return new NoneProxy().proxy(object);
+    }
+
+}

@@ -71,7 +71,6 @@ public class AsyncExecutor extends ThreadPoolExecutor implements IAsyncExecutor 
      */
     private static synchronized void init() {
         try {
-            System.out.println("开始初始化配置");
             if(isInit) {
                 return;
             }

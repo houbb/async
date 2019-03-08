@@ -13,9 +13,11 @@
 
 但是单独为每次方法都使用线程池手写，显然不够优雅，复用性也很差。
 
-## 版本特性
+## 特性
 
 - 支持接口类的动态代理异步
+
+- 支持非接口类的 CGLIB 代理异步
 
 # 快速入门
 
@@ -161,3 +163,5 @@ public void queryUserDynamicProxyTest() {
 # 拓展阅读
 
 [Async-01-项目模块说明](doc/blog/async-01-项目模块介绍.md)
+
+[Async-02-CGLIB代理.md](doc/blog/async-02-CGLIB代理.md)

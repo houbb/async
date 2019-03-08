@@ -49,10 +49,10 @@ public class UserServiceTest {
     }
 
     /**
-     * 不使用代理
+     * CGLIB 代理
      */
     @Test
-    public void queryUserNoneProxyTest() {
+    public void queryUserCglibProxyTest() {
         long start = System.currentTimeMillis();
         UserServiceDefault userService = new UserServiceDefault();
         UserServiceDefault userServiceProxy = (UserServiceDefault) AsyncProxy.getProxy(userService);

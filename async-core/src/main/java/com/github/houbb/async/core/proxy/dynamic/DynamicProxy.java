@@ -33,10 +33,10 @@ public class DynamicProxy implements InvocationHandler, IAsyncProxy {
     /**
      * 被代理的对象
      */
-    private final Object subject;
+    private final Object target;
 
-    public DynamicProxy(Object subject) {
-        this.subject = subject;
+    public DynamicProxy(Object target) {
+        this.target = target;
     }
 
     /**
@@ -44,7 +44,7 @@ public class DynamicProxy implements InvocationHandler, IAsyncProxy {
      * 强制用户返回值为 Future 的子类。
      *
      * 如何实现不影响原来的值，要怎么实现呢？
-     * @param proxy 代理
+     * @param proxy 原始对象
      * @param method 方法
      * @param args 入参
      * @return 结果
@@ -56,19 +56,18 @@ public class DynamicProxy implements InvocationHandler, IAsyncProxy {
         // 当代理对象调用真实对象的方法时，其会自动的跳转到代理对象关联的handler对象的invoke方法来进行调用
         // 这里将待执行的方法，放在 Executor 中进行执行。
         //TODO: 对于异常结果的处理。
-        Future future = executor.submit(() -> method.invoke(subject, args));
+        Future future = executor.submit(() -> method.invoke(target, args));
         AsyncResult asyncResult = new AsyncResult();
         asyncResult.setFuture(future);
         return asyncResult;
     }
 
     @Override
-    public Object proxy(Object object) {
+    public Object proxy() {
         // 我们要代理哪个真实对象，就将该对象传进去，最后是通过该真实对象来调用其方法的
-        InvocationHandler handler = new DynamicProxy(object);
+        InvocationHandler handler = new DynamicProxy(target);
 
         return Proxy.newProxyInstance(handler.getClass().getClassLoader(),
-                object.getClass().getInterfaces(), handler);
+                target.getClass().getInterfaces(), handler);
     }
-
 }

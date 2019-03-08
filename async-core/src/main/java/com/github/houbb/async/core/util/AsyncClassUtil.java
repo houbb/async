@@ -16,26 +16,22 @@ package com.github.houbb.async.core.util;
  */
 public final class AsyncClassUtil {
 
-    /**
-     * 是否包含接口
-     * @param object 对象
-     * @return 是否
-     */
-    public static boolean hasInterface(final Object object) {
-        if (null == object) {
-            return false;
-        }
-
-        //TODO: 这里如果不是直接实现，存在问题。
-        // 比如只是实现了 Serial 怎么处理？？
-        Class clazz = object.getClass();
-        Class<?>[] interfaces = clazz.getInterfaces();
-        if(interfaces != null
-            && interfaces.length > 0) {
-            return true;
-        }
-
-        return false;
-    }
+//    /**
+//     * 是否包含接口
+//     * @param object 对象
+//     * @return 是否
+//     */
+//    public static boolean (final Object object) {
+//        //TODO: 这里如果不是直接实现，存在问题。
+//        // 比如只是实现了 Serial 怎么处理？？
+//        Class clazz = object.getClass();
+//        Class<?>[] interfaces = clazz.getInterfaces();
+//        if(interfaces != null
+//            && interfaces.length > 0) {
+//            return true;
+//        }
+//
+//        return false;
+//    }
 
 }

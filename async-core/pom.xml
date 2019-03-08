@@ -18,6 +18,18 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>async-api</artifactId>
         </dependency>
+
+        <!--============================== INTER ==============================-->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>heaven</artifactId>
+        </dependency>
+
+        <!--============================== OTHER ==============================-->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

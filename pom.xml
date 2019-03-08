@@ -36,10 +36,12 @@
 
         <!--============================== INTER ==============================-->
         <plugin.gen.version>1.0.6</plugin.gen.version>
+        <heaven.version>0.0.4</heaven.version>
 
         <!--============================== OTHER ==============================-->
         <junit5.version>5.2.0</junit5.version>
         <apiguardian-api.version>1.0.0</apiguardian-api.version>
+        <cglib.version>3.1</cglib.version>
     </properties>
 
 
@@ -59,6 +61,13 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!--============================== INTER ==============================-->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>heaven</artifactId>
+                <version>${heaven.version}</version>
+            </dependency>
+
             <!--============================== OTHER ==============================-->
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
@@ -73,6 +82,12 @@
                 <artifactId>apiguardian-api</artifactId>
                 <version>${apiguardian-api.version}</version>
                 <optional>true</optional>
+            </dependency>
+
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>${cglib.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

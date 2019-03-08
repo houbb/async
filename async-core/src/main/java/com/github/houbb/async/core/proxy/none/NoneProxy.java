@@ -21,6 +21,15 @@ import java.lang.reflect.Method;
  */
 public class NoneProxy implements InvocationHandler, IAsyncProxy {
 
+    /**
+     * 代理对象
+     */
+    private final Object target;
+
+    public NoneProxy(Object target) {
+        this.target = target;
+    }
+
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         return method.invoke(proxy, args);
@@ -28,12 +37,11 @@ public class NoneProxy implements InvocationHandler, IAsyncProxy {
 
     /**
      * 返回原始对象，没有代理
-     * @param object 原始对象
      * @return 原始对象
      */
     @Override
-    public Object proxy(Object object) {
-        return object;
+    public Object proxy() {
+        return this.target;
     }
 
 }

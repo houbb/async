@@ -15,7 +15,7 @@ import java.util.concurrent.Future;
 /**
  * CGLIB 代理类
  * @author binbin.hou
- * @date 2019/3/7
+ * date 2019/3/7
  * @since 0.0.2
  */
 public class CglibProxy implements MethodInterceptor, IAsyncProxy {

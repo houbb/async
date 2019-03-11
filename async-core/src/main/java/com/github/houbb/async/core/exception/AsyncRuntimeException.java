@@ -3,7 +3,7 @@ package com.github.houbb.async.core.exception;
 /**
  * 异步运行时异常
  * @author binbin.hou
- * @date 2019/3/8
+ * date 2019/3/8
  * @since 0.0.2
  */
 public class AsyncRuntimeException extends RuntimeException{

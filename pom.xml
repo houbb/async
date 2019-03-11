@@ -7,7 +7,7 @@
     <groupId>com.github.houbb</groupId>
     <artifactId>async</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.2</version>
     <modules>
         <module>async-api</module>
         <module>async-core</module>
@@ -24,7 +24,7 @@
         <plugin.surefire.ignore-failure>false</plugin.surefire.ignore-failure>
 
         <plugin.maven-source-plugin.version>2.2.1</plugin.maven-source-plugin.version>
-        <plugin.maven-javadoc-plugin.version>2.9.1</plugin.maven-javadoc-plugin.version>
+        <plugin.maven-javadoc-plugin.version>2.10.4</plugin.maven-javadoc-plugin.version>
         <plugin.maven-gpg-plugin.version>1.5</plugin.maven-gpg-plugin.version>
 
         <plugin.coveralls.version>4.3.0</plugin.coveralls.version>
@@ -198,13 +198,19 @@
                         <version>${plugin.maven-javadoc-plugin.version}</version>
                         <executions>
                             <execution>
-                                <phase>package</phase>
+                                <id>attach-javadocs</id>
                                 <goals>
                                     <goal>jar</goal>
                                 </goals>
                             </execution>
                         </executions>
                         <configuration>
+                            <encoding>UTF-8</encoding>
+                            <aggregate>true</aggregate>
+                            <charset>UTF-8</charset>
+                            <docencoding>UTF-8</docencoding>
+                            <aggregate>true</aggregate>
+                            <additionalparam>-Xdoclint:none</additionalparam>
                             <tags>
                                 <tag>
                                     <name>date</name>

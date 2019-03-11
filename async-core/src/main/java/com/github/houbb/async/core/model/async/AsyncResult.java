@@ -15,7 +15,7 @@ import java.util.concurrent.TimeoutException;
 /**
  * 异步执行结果
  * @author binbin.hou
- * @date 2019/3/7
+ * date 2019/3/7
  * @since 0.0.1
  */
 public class AsyncResult<T> extends AbstractAsyncResult<T> {

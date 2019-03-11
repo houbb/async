@@ -11,7 +11,7 @@ import java.util.concurrent.*;
 /**
  * 异步执行器
  * @author binbin.hou
- * @date 2019/3/8
+ * date 2019/3/8
  * @since 0.0.2
  */
 public class AsyncExecutor extends ThreadPoolExecutor implements IAsyncExecutor {

@@ -4,7 +4,10 @@ import com.github.houbb.async.api.core.async.IAsyncResult;
 import com.github.houbb.async.api.core.executor.IAsyncExecutor;
 import com.github.houbb.async.core.exception.AsyncRuntimeException;
 import com.github.houbb.async.core.model.async.AsyncResult;
+import com.github.houbb.log.integration.core.Log;
+import com.github.houbb.log.integration.core.LogFactory;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.concurrent.*;
 
@@ -15,6 +18,8 @@ import java.util.concurrent.*;
  * @since 0.0.2
  */
 public class AsyncExecutor extends ThreadPoolExecutor implements IAsyncExecutor {
+
+    private static final Log log = LogFactory.getLog(AsyncExecutor.class);
 
     //region 私有属性
     /**
@@ -52,13 +57,22 @@ public class AsyncExecutor extends ThreadPoolExecutor implements IAsyncExecutor 
     //endregion
 
     @SuppressWarnings("all")
-    public static <T> IAsyncResult<T> submit(Object target, Method method, Object[] objects) {
+    public static <T> IAsyncResult<T> submit(final Object target, final Method method, final Object[] objects) {
         // 初始化的判断
         if(!isInit) {
             init();
         }
 
-        Future future = executorService.submit(() -> method.invoke(target, objects));
+        Future future = executorService.submit(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    method.invoke(target, objects);
+                } catch (IllegalAccessException | InvocationTargetException e) {
+                    log.error("异步执行遇到异常: ", e);
+                }
+            }
+        });
         AsyncResult<T> asyncResult = new AsyncResult<>();
         asyncResult.setFuture(future);
         return asyncResult;

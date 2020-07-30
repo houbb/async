@@ -7,11 +7,12 @@
     <groupId>com.github.houbb</groupId>
     <artifactId>async</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <modules>
         <module>async-api</module>
         <module>async-core</module>
         <module>async-test</module>
+        <module>async-spring</module>
     </modules>
 
 
@@ -32,19 +33,18 @@
 
         <!--============================== MAIN ==============================-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.compiler.level>1.8</project.compiler.level>
+        <project.compiler.level>1.7</project.compiler.level>
 
         <!--============================== INTER ==============================-->
-        <plugin.gen.version>1.0.6</plugin.gen.version>
-        <heaven.version>0.0.4</heaven.version>
+        <heaven.version>0.1.112</heaven.version>
+        <log-integration.version>1.1.8</log-integration.version>
 
         <!--============================== OTHER ==============================-->
-        <junit5.version>5.2.0</junit5.version>
-        <apiguardian-api.version>1.0.0</apiguardian-api.version>
+        <junit.version>4.12</junit.version>
         <cglib.version>3.1</cglib.version>
+        <spring.version>4.3.24.RELEASE</spring.version>
+        <aspectj.version>1.8.5</aspectj.version>
     </properties>
-
-
 
     <dependencyManagement>
 
@@ -60,6 +60,11 @@
                 <artifactId>async-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>async-spring</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!--============================== INTER ==============================-->
             <dependency>
@@ -67,21 +72,19 @@
                 <artifactId>heaven</artifactId>
                 <version>${heaven.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>log-integration</artifactId>
+                <version>${log-integration.version}</version>
+            </dependency>
 
             <!--============================== OTHER ==============================-->
             <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-engine</artifactId>
-                <version>${junit5.version}</version>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <optional>true</optional>
                 <scope>test</scope>
-                <optional>true</optional>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apiguardian</groupId>
-                <artifactId>apiguardian-api</artifactId>
-                <version>${apiguardian-api.version}</version>
-                <optional>true</optional>
             </dependency>
 
             <dependency>
@@ -89,22 +92,38 @@
                 <artifactId>cglib</artifactId>
                 <version>${cglib.version}</version>
             </dependency>
+
+            <!--spring-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
-
-
-    <dependencies>
-        <!--============================== OTHER ==============================-->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apiguardian</groupId>
-            <artifactId>apiguardian-api</artifactId>
-        </dependency>
-    </dependencies>
 
     <build>
         <plugins>
@@ -128,15 +147,6 @@
                 <version>${plugin.maven-javadoc-plugin.version}</version>
             </plugin>
 
-            <plugin>
-                <groupId>com.github.houbb</groupId>
-                <artifactId>gen-maven-plugin</artifactId>
-                <version>${plugin.gen.version}</version>
-                <configuration>
-                    <junitVersion>5</junitVersion>
-                    <isOverwriteWhenExists>false</isOverwriteWhenExists>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 

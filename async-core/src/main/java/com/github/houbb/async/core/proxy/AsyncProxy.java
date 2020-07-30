@@ -8,7 +8,6 @@ package com.github.houbb.async.core.proxy;
 import com.github.houbb.async.core.proxy.cglib.CglibProxy;
 import com.github.houbb.async.core.proxy.dynamic.DynamicProxy;
 import com.github.houbb.async.core.proxy.none.NoneProxy;
-import com.github.houbb.async.core.util.AsyncClassUtil;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 
 import java.lang.reflect.Proxy;

@@ -2,6 +2,7 @@ package com.github.houbb.async.test.service.impl;
 
 import com.github.houbb.async.core.model.async.AsyncResult;
 import com.github.houbb.async.test.service.UserService;
+import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
 
@@ -11,6 +12,7 @@ import java.util.concurrent.TimeUnit;
  * date 2019/3/7
  * @since 0.0.1
  */
+@Service
 public class UserServiceImpl implements UserService {
 
     @Override

@@ -1,11 +1,10 @@
 # 项目简介
 
-基于注解的 Java 异步处理框架。
+基于注解的 java 异步处理框架。
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.houbb/async/badge.svg)](http://mvnrepository.com/artifact/com.github.houbb/async)
 [![Build Status](https://www.travis-ci.org/houbb/async.svg?branch=master)](https://www.travis-ci.org/houbb/async?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/houbb/async/badge.svg?branch=master)](https://coveralls.io/github/houbb/async?branch=master)
-
 
 ## 设计目的
 
@@ -23,13 +22,19 @@
 
 具体测试代码，参见 async-test 模块。 
 
+## 需要
+
+- jdk1.7+
+
+- maven 3.x+
+
 ## 引入 maven
 
 ```xml
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>async-core</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.3</version>
 </dependency>
 ```
 
@@ -165,3 +170,13 @@ public void queryUserDynamicProxyTest() {
 [Async-01-项目模块说明](doc/blog/async-01-项目模块介绍.md)
 
 [Async-02-CGLIB代理.md](doc/blog/async-02-CGLIB代理.md)
+
+[Async-03-Spring-整合.md](doc/blog/async-03-spring-整合.md)
+
+# 后期 Road-MAP
+
+- [ ] 开启可以指定为 sync 或者 async 的方式执行。
+
+- [ ] 对于返回值的优化，返回值可以是任何类型。
+
+- [ ] 添加 spring-boot-starter 特性

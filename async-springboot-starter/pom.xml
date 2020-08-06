@@ -9,28 +9,17 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>async-test</artifactId>
+    <artifactId>async-springboot-starter</artifactId>
 
     <dependencies>
-        <!--============================== SELF ==============================-->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>async-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>async-core</artifactId>
-        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>async-spring</artifactId>
         </dependency>
 
-        <!--============================== SELF ==============================-->
         <dependency>
-            <groupId>com.github.houbb</groupId>
-            <artifactId>test-spring</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
-
 </project>

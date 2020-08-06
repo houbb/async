@@ -7,7 +7,7 @@
     <groupId>com.github.houbb</groupId>
     <artifactId>async</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.4</version>
+    <version>0.0.5-SNAPSHOT</version>
     <modules>
         <module>async-api</module>
         <module>async-core</module>
